@@ -1,8 +1,8 @@
-# AZSHOP Furniture Website
+# FURNISHOP Furniture Website
 
 ## Project Overview
 
-AZSHOP is a dynamic furniture website built using Servlets, JSP/JSTL, Bootstrap, JDBC, MySQL, and decorated with Sitemesh. 
+FURNISHOP is a dynamic furniture website built using Servlets, JSP/JSTL, Bootstrap, JDBC, MySQL, and decorated with Sitemesh. 
 This project aims to provide an efficient and user-friendly platform for browsing and purchasing furniture items.
 
 ## Table of Contents
@@ -29,9 +29,9 @@ This project aims to provide an efficient and user-friendly platform for browsin
 
 Make sure you have the following installed:
 
-- Java Development Kit (JDK)
-- Apache Tomcat Server
-- SQLServer/MySQL/PostgreSQL Database
+- Java Development Kit (JDK): JDK 22
+- Apache Tomcat Server 9.0
+- MYSQL
 - IDE (Eclipse, IntelliJ, etc.)
 - Git
 
@@ -40,7 +40,7 @@ Make sure you have the following installed:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/ngthtuyen9823/AZShopFurni.git
+   git clone https://github.com/lhh3105/Ltweb_Project_Final.git
    ```
 
 2. Import the project into your IDE.
