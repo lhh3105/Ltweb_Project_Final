@@ -10,11 +10,10 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Style -->
-<link rel="icon" type="image/png" href="https://storage.googleapis.com/web-budget/Image/FE/website-logo.png">
+<link rel="icon" type="image/png" href="https://phuongnamvina.com/img_data/images/lam-logo-ban-hang-online-dep.jpg">
 <link rel="stylesheet" type="text/css"
 	href="<c:url value="/templates/web/css/login.css"/>">
-<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
-	rel='stylesheet'>
+
 
 <title>Đăng nhập</title>
 </head>
@@ -22,24 +21,23 @@
 <body>
 	<div class="wrapper">
 		<form action="/AZShopFurni/login" method="post">
-			<h1>
-				ĐĂNG NHẬP
-				</h1>
+			<h1>Đăng nhập</h1>
 					<h4>${mess}</h4>
 					<div class="input-box">
 						<input type="text" placeholder="Tên đăng nhập" value="${username}"
 							name="username" required> <i class='bx bxs-user'></i>
 					</div>
 					<div class="input-box">
-						<input type="password" placeholder="Mật khẩu" name="password"
+						<input type="password" placeholder="Mật khẩu" id = "password" name="password"
 							required> <i class='bx bxs-lock-alt'></i>
+						 <span class="eye-icon" onclick="togglePassword()">👁️</span>
 					</div>
 					<div class="remember-forgot">
 						<label><input type="checkbox" name="remember" value="on">Nhớ
 							mật khẩu</label> <a href="${pageContext.request.contextPath}/forgetpass">Quên
 							mật khẩu</a>
 					</div>
-					<button type="submit" class="btn">Đăng nhập</button>
+					<button type="submit" class="btn">Login</button>
 					<div class="register-link">
 						<p>
 							Bạn chưa có tài khoản? <a
@@ -48,5 +46,19 @@
 					</div>
 		</form>
 	</div>
+
+	<script>
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var eyeIcon = document.querySelector(".eye-icon");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.textContent = "🙈";
+            } else {
+                passwordField.type = "password";
+                eyeIcon.textContent = "👁️";
+            }
+        }
+    </script>
 </body> 
 </html>

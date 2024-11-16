@@ -17,7 +17,7 @@
 
 				<!-- Logo desktop -->
 				<a href="<c:url value='/home'/>" class="logo"> <img
-					src="https://phuongnamvina.com/img_data/images/lam-logo-ban-hang-online-dep.jpg"
+					 src="https://www.web-furniture.com/wp-content/uploads/2023/04/web-furniture_blu.png"
 					alt="IMG-LOGO">
 				</a>
 

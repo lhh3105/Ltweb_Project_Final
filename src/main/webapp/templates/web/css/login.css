@@ -18,20 +18,39 @@ body{
     background: url(https://storage.googleapis.com/web-budget/Image/Login/bg-login-page1.jpg) no-repeat;
     background-size: cover;
     background-position: center;
+    background-color:#fafafa; 
 }
+.eye-icon {
+            position: absolute;
+            top: 50%;
+            right: 5px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+.password-container {
+            position: relative;
+        }
+.input-container label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
 .wrapper{
     width: 420px;
-    background-color: transparent;
-    color: #fff;  
-    border: 2px solid rgba(255, 255, 255, .2);
+    background-color: #fff;
+    color: #050407;
+
     backdrop-filter: blur(20px);
-    border-radius: 12px;
+    border-radius: 10px;
     padding: 30px 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 .wrapper h1{
-    font-size: 36px;
+    font-size: 30px;
     text-align: center;
-    font-weight: 640;
+    font-weight: 500;
 }
 .wrapper h4 {
     font-weight: lighter;
@@ -58,14 +77,14 @@ body{
     background: transparent;
     border: none;
     outline: none;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 2px solid grey;
     border-radius: 40px;
     font-size: 16px;
-    color: #fff;
+    color: black;
     padding: 20px 45px 20px 20px;
 }
 .input-box input::placeholder{
-    color: #fff;
+    color: grey;
 }
 .input-box i{
     position: absolute;
@@ -83,12 +102,12 @@ body{
 }
 
 .remember-forgot label input{
-    accent-color: #fff;
+    accent-color: #007bff;
     margin-right: 3px;
 }
 
 .remember-forgot a{
-    color: #fff;
+    color: #007bff;
     text-decoration: none;
 }
 
@@ -99,14 +118,14 @@ body{
 .wrapper .btn{
     width: 100%;
     height: 45px;
-    background: #fff;
+    background: #c1853d;
     border: none;
     outline: none;
     border-radius: 40px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     cursor: pointer;
     font-size: 16px;
-    color: #333;
+    color: #fff;
     font-weight: 600;
 }
 
@@ -117,14 +136,14 @@ body{
 }
 
 .register-link p a{
-    color: #fff;
+    color: 007bff;
     text-decoration: none;
     font-size: 600;
 }
 
 .register-link p a:hover{
     text-decoration: underline;
-    color: black;
+    color: 007bff;
 }
 .wrapper.signup h1{
 	font-size: 36px;
