@@ -15,6 +15,7 @@ public interface IProductDAO {
 
 	ProductModel findOne(int id);
 	ProductModel findOneProduct(int id);
+	List<ProductModel> findOneProductByCategoryname(String catename);
 	void insertProduct (ProductModel model);
 	void deleteProduct (int ProId);
 	void updateProduct (ProductModel model);
@@ -28,4 +29,5 @@ public interface IProductDAO {
 
 	List<ProductModel> findBySupplierID(int supplier);
 	List<List<Object>> ProductRating();
+	
 }

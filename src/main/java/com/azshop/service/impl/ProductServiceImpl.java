@@ -92,4 +92,10 @@ public class ProductServiceImpl implements IProductService {
 	public List<List<Object>> ProductRating() {
 		return productDAO.ProductRating();
 	}
+
+	@Override
+	public List<ProductModel> findOneProductByCategoryname(String catename) {
+		
+		return productDAO.findOneProductByCategoryname(catename);
+	}
 }

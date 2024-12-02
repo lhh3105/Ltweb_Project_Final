@@ -11,6 +11,7 @@
 
 <body>
 	<!-- Product -->
+	<form action="<c:url value='/products' />" method="post">
 	<section class="bg0 p-t-23 p-b-130">
 		<div class="container">
 			<div class="p-b-10">
@@ -19,7 +20,7 @@
 			<div class="flex-w flex-sb-m p-b-52">
 				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
 					<a href="<c:url value='/products'/>"
-						class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${rootcategory.categoryID == null ? 'how-active1' : ''}"
+						class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 ${rootcategory.categoryID == 0 ? 'how-active1' : ''}"
 						data-filter="*">Tất cả sản phẩm</a>
 
 					<c:forEach items="${rootCategories}" var="item">
@@ -28,7 +29,30 @@
 							data-filter="*">${item.categoryName}</a>
 					</c:forEach>
 				</div>
+				
 				<div class="flex-w flex-c-m m-tb-10">
+					 <div class="dropdown flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4"
+					 	>
+        				<label for="category" style = "margin-right: 10px; margin-left: 10px">Loại sản phẩm:</label>
+        				
+        				<select id="category" name = "category" onchange="updateSubcategories() " style = "margin-bottom: 7px; margin-right: 10px">
+            				<option value="All">All</option>
+            				<option value="chair">Chair</option>
+            				<option value="desk">Table</option>
+            				<option value="shelf">shelf</option>
+            				
+        				</select>
+    				</div>
+    				<div class="dropdown flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4">
+        				<label for="subcategory" style = "margin-right: 10px; margin-left: 10px">Danh mục con:</label>
+        				<select id="subcategory" name = "subcategory" style = "margin-bottom: 7px; margin-right: 10px">
+            				<option value="All">All</option>
+        				</select>
+   					 </div>
+   					 
+   					  <!-- Nút lọc -->
+    					<button type="submit" class="btn btn-primary">Lọc</button>
+				
 					<div
 						class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
 						<i
@@ -208,7 +232,9 @@
 				</div>
 
 			</c:if>
-
+			<h2>${products.size()}</h2>
+			<h1>${mycate}</h1>
+			<h1>${mysub}</h1>
 			<!-- List Products -->
 			<div class="row isotope-grid">
 				<c:if test="${products.size() > 0}">
@@ -261,6 +287,7 @@
 			</div>
 		</div>
 	</section>
+	</form>
 
 	<script>
 		var params = {
@@ -307,6 +334,32 @@
 			params["page"] = page
 			run(0);
 		}
+		
+		const subcategories = {
+	            chair: ["sofa", "armchair", "deskchair"],
+	            desk: ["computer desk", "dining table", "dressing table"],
+	            
+	        };
+
+	        function updateSubcategories() {
+	            const category = document.getElementById("category").value;
+	            const subcategorySelect = document.getElementById("subcategory");
+
+	            // Xóa các lựa chọn hiện tại
+	            subcategorySelect.innerHTML = `<option value="">All</option>`;
+
+	            // Nếu có category được chọn, hiển thị subcategories tương ứng
+	            if (category && subcategories[category]) {
+	                subcategories[category].forEach(subcat => {
+	                    const option = document.createElement("option");
+	                    option.value = subcat.toLowerCase();
+	                    option.textContent = subcat;
+	                    subcategorySelect.appendChild(option);
+	                });
+	            }
+	        }
+	        
+	        
 	</script>
 
 </body>

@@ -222,6 +222,37 @@ public class ProductController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		 // Lấy thông tin từ form
+        String selectedCategory = req.getParameter("category");
+        String selectedSubcategory = req.getParameter("subcategory");
+        
+        System.out.println("Selected Category: " + selectedCategory);  // Kiểm tra giá trị category
+        System.out.println("Selected Subcategory: " + selectedSubcategory);  // Kiểm tra giá trị subcategory
+        List<ProductModel> list;
+        
+        if (selectedCategory.equals("All") && selectedSubcategory.equals("All")) {
+        	list = productService.findAll();
+        	System.out.println("list all: "); 
+        	 // Đưa kết quả lọc vào request
+            req.setAttribute("products", list);
+        }
+        else if (!selectedCategory.equals("All") && selectedSubcategory.equals("All")) {
+        	list = productService.findOneProductByCategoryname(selectedCategory);
+       	 // Đưa kết quả lọc vào request
+           req.setAttribute("products", list);
+           System.out.println("1 0 "); 
+        }
+        else if (!selectedSubcategory.equals("All") && !selectedSubcategory.equals("All")){
+        	list = productService.findOneProductByCategoryname(selectedSubcategory);
+          	 // Đưa kết quả lọc vào request
+              req.setAttribute("products", list);
+              System.out.println("0 0 "); 
+        }
+        System.out.println("1 1 "); 
+
+
+        // Chuyển hướng lại về trang JSP hiển thị sản phẩm
+        req.getRequestDispatcher("/views/web/products/products.jsp").forward(req, resp);
 
 	}
 }

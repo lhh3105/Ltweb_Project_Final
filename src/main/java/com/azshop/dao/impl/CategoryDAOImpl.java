@@ -8,7 +8,9 @@ import java.util.List;
 
 import com.azshop.connection.DBConnection;
 import com.azshop.dao.ICategoryDAO;
+import com.azshop.dao.IProductDAO;
 import com.azshop.models.CategoryModel;
+import com.azshop.models.ProductModel;
 
 public class CategoryDAOImpl implements ICategoryDAO {
 	Connection conn = null;
@@ -124,10 +126,18 @@ public class CategoryDAOImpl implements ICategoryDAO {
 				+ "    FROM AZShop.CATEGORY c\r\n"
 				+ "    JOIN CategoryPath cp ON c.CategoryID = cp.ParentCategoryID\r\n" + ")\r\n" + "SELECT *\r\n"
 				+ "FROM CategoryPath\r\n" + "WHERE ParentCategoryID IS NULL;";
+		
+		String sql1 = "WITH RECURSIVE CategoryPath AS (\r\n"
+				+ "    SELECT CategoryID, ParentCategoryID, CategoryName, Image\r\n" + "    FROM AZShop.CATEGORY\r\n"
+				+ "    WHERE CategoryID=? \r\n" + "    UNION ALL\r\n"
+				+ "    SELECT c.CategoryID, c.ParentCategoryID, c.CategoryName, c.Image\r\n"
+				+ "    FROM AZShop.CATEGORY c\r\n"
+				+ "    JOIN CategoryPath cp ON c.CategoryID = cp.ParentCategoryID\r\n" + ")\r\n" + "SELECT *\r\n"
+				+ "FROM CategoryPath\r\n"+ "WHERE ParentCategoryID = 0;";
 		try {
 			new DBConnection();
 			conn = DBConnection.getConnection();
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql1);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
@@ -147,4 +157,16 @@ public class CategoryDAOImpl implements ICategoryDAO {
 		}
 		return category;
 	}
+	
+	
+	
+	
+	
+	public static void main(String[] args) {
+		ICategoryDAO cateDAO = new CategoryDAOImpl();
+
+		CategoryModel cate =  cateDAO.findRootCategoryByCategoryId(1);
+		
+		System.out.println(cate);
+	} 
 }

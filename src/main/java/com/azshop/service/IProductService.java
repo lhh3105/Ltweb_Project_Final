@@ -27,4 +27,5 @@ public interface IProductService {
 
 	List<ProductModel> findBySupplierID(int supplierID);
 	List<List<Object>> ProductRating();
+	List<ProductModel> findOneProductByCategoryname(String catename);
 }

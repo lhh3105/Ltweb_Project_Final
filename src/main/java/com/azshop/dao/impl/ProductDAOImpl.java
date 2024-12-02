@@ -57,6 +57,8 @@ public class ProductDAOImpl implements IProductDAO {
 		}
 		return list;
 	}
+	
+	
 
 	@Override
 	public List<ProductModel> findByCategoryID(int cateId) {
@@ -101,6 +103,8 @@ public class ProductDAOImpl implements IProductDAO {
 		}
 		return list;
 	}
+	
+	
 
 	@Override
 	public List<ProductModel> findWithCount(int count) {
@@ -133,11 +137,7 @@ public class ProductDAOImpl implements IProductDAO {
 		return list;
 	}
 
-	public static void main(String[] args) {
-		IProductDAO productDAO = new ProductDAOImpl();
-
-		List<List<Object>> list =  productDAO.ProductRating();
-	}
+	
 
 	@Override
 	public void insertProduct(ProductModel model) {
@@ -522,4 +522,57 @@ public class ProductDAOImpl implements IProductDAO {
 		}
 		return list;
 	}
+	
+	@Override
+	public List<ProductModel> findOneProductByCategoryname(String catename) {
+		String sql = "SELECT p.*, \r\n"
+				+ "       SUBSTRING_INDEX(GROUP_CONCAT(ii.Image ORDER BY ii.ItemImageID), ',', 1) AS FirstImage,\r\n"
+				+ "       (SELECT MIN(i.PromotionPrice) FROM ITEM i WHERE i.ProductID = p.ProductID) AS MinPromotionPrice,\r\n"
+				+ "       (SELECT MIN(i.OriginalPrice) FROM ITEM i WHERE i.ProductID = p.ProductID) AS MinOriginalPrice,\r\n"
+				+ "AVG(rating) as Rating\r\n" + "FROM CATEGORY c\r\n"
+				+ "JOIN PRODUCT p ON c.CategoryID = p.CategoryID\r\n" + "JOIN ITEM i ON p.ProductID = i.ProductID\r\n"
+				+ "JOIN ITEMIMAGE ii ON ii.ItemID = i.ItemID\r\n" + "LEFT JOIN DETAIL d ON d.ItemID=i.ItemID\r\n"
+				+ "WHERE c.CategoryName = ?\r\n"
+				+ "GROUP BY p.ProductID;";
+		List<ProductModel> list = new ArrayList<ProductModel>();
+
+		try {
+			new DBConnection();
+			conn = DBConnection.getConnection();
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, catename);
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				ProductModel model = new ProductModel();
+				int productID = rs.getInt("ProductID");
+
+				model.setProductID(productID);
+				model.setProductName(rs.getString("ProductName"));
+				model.setDescription(rs.getString("Description"));
+				model.setOrigin(rs.getString("Origin"));
+				model.setSupplierID(rs.getInt("SupplierID"));
+				model.setCategoryID(rs.getInt("CategoryID"));
+				model.setMaterial(rs.getString("Material"));
+				model.setAvgRating(rs.getFloat("Rating"));
+				model.setDisplayedImage(rs.getString("FirstImage"));
+				model.setDisplayedPromotionPrice(rs.getInt("MinPromotionPrice"));
+				model.setDisplayedOriginalPrice(rs.getInt("MinOriginalPrice"));
+
+				list.add(model);
+			}
+			conn.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public static void main(String[] args) {
+		IProductDAO productDAO = new ProductDAOImpl();
+
+		List<ProductModel> list =  productDAO.findOneProductByCategoryname("sofa");
+		List<ProductModel> list1 =  productDAO.findAll();
+		System.out.println("products"+ list);
+	} 
 }
