@@ -227,7 +227,8 @@ public class ProductController extends HttpServlet {
         String selectedSubcategory = req.getParameter("subcategory");
         
         System.out.println("Selected Category: " + selectedCategory);  // Kiểm tra giá trị category
-        System.out.println("Selected Subcategory: " + selectedSubcategory);  // Kiểm tra giá trị subcategory
+        System.out.println("Selected Subcategory: " + String.valueOf(selectedSubcategory.length()));  // Kiểm tra giá trị subcategory
+        
         List<ProductModel> list;
         
         if (selectedCategory.equals("All") && selectedSubcategory.equals("All")) {
@@ -236,7 +237,7 @@ public class ProductController extends HttpServlet {
         	 // Đưa kết quả lọc vào request
             req.setAttribute("products", list);
         }
-        else if (!selectedCategory.equals("All") && selectedSubcategory.equals("All")) {
+        else if (!selectedCategory.equals("All") && selectedSubcategory.length()== 0 ) {
         	list = productService.findOneProductByCategoryname(selectedCategory);
        	 // Đưa kết quả lọc vào request
            req.setAttribute("products", list);
@@ -248,6 +249,7 @@ public class ProductController extends HttpServlet {
               req.setAttribute("products", list);
               System.out.println("0 0 "); 
         }
+        
         System.out.println("1 1 "); 
 
 
