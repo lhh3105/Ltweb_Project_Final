@@ -19,7 +19,7 @@ public class CustomerDAOImpl implements ICustomerDAO {
 
 	@Override
 	public List<UserModel> getAllCustomer() {
-		String sql = "SELECT * FROM USER WHERE Type=0";
+		String sql = "SELECT * FROM USER ";
 		List<UserModel> listCustomer = new ArrayList<>();
 		try {
 			new DBConnection();
@@ -36,10 +36,10 @@ public class CustomerDAOImpl implements ICustomerDAO {
 				customer.setPhone(rs.getString(6));
 				customer.setDob(rs.getDate(7));
 				customer.setCid(rs.getString(8));
-				customer.setAvatar(rs.getString(9));
-				customer.setType(rs.getInt(10));
-				customer.setKpi(rs.getInt(11));
-				customer.setArea(rs.getString(12));
+				customer.setAvatar(rs.getString(12));
+				customer.setType(rs.getInt(9));
+				customer.setKpi(rs.getInt(10));
+				customer.setArea(rs.getString(11));
 				customer.setEmail(rs.getString(13));
 				listCustomer.add(customer);
 			}
@@ -104,7 +104,7 @@ public class CustomerDAOImpl implements ICustomerDAO {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			ps.setString(7, sdf.format(customer.getDob()));
 			ps.setString(8, customer.getCid());
-			ps.setString(12, customer.getAvatar());
+			ps.setString(12, null);
 			ps.setInt(9, customer.getType());
 			ps.setInt(10,customer.getKpi());
 			ps.setString(11, customer.getArea());

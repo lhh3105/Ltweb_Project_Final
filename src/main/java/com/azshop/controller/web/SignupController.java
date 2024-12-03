@@ -46,10 +46,112 @@ public class SignupController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
-		if (url.contains("signup"))
-			checkInfoSignup(req, resp);
-		else if (url.contains("verification"))
-			insertCus(req, resp);
+		if (url.contains("signup")) {
+			req.setCharacterEncoding("UTF-8");
+			resp.setCharacterEncoding("UTF-8");
+			System.out.println("1");
+			try {
+				System.out.println("11");
+				cusService.checkValidInfoCustomer(req.getParameter("firstname"), req.getParameter("lastname"),
+						req.getParameter("address"), req.getParameter("gender"), req.getParameter("phone"),
+						req.getParameter("dob"), req.getParameter("area"), req.getParameter("email"),
+						req.getParameter("usernamesignup"), req.getParameter("passsignup"), req.getParameter("passcheck"));
+				req.removeAttribute("exception");
+				System.out.println("111");
+				UserModel user = new UserModel();
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				System.out.println("t1");
+				user.setUserID(cusService.createCustomerID());
+				System.out.println("t2");
+				user.setFirstName(req.getParameter("firstname"));
+				user.setLastName(req.getParameter("lastname"));
+				user.setEmail(req.getParameter("email"));
+				user.setPhone(req.getParameter("phone"));
+				user.setArea(req.getParameter("area"));
+				user.setAddress(req.getParameter("address"));
+				user.setGender(Integer.parseInt(req.getParameter("gender")));
+				user.setDob(formatter.parse(req.getParameter("dob")));
+				System.out.println("1: "+ user.getDob());
+
+
+				AccountModel acc = new AccountModel();
+				acc.setUserID(user.getUserID());
+				acc.setUserName(req.getParameter("usernamesignup"));
+				acc.setPassword(req.getParameter("passsignup"));
+
+				HttpSession session = req.getSession();
+				session.setAttribute("newuser", user);
+				
+				session.setAttribute("newacc", acc);
+				
+				cusService.insertCustomer(user);
+				accService.insertAccount(acc);
+				System.out.println("2");
+				//session.invalidate();
+				resp.sendRedirect(req.getContextPath() + "/login");
+
+				//sendVerificationEmail(req);
+
+				//resp.sendRedirect("verification");
+
+			} catch (IllegalArgumentException e) {
+				req.setAttribute("exception", e.getMessage());
+				req.setAttribute("usernamesignup", req.getParameter("usernamesignup"));
+				req.setAttribute("firstname", req.getParameter("firstname"));
+				req.setAttribute("lastname", req.getParameter("lastname"));
+				req.setAttribute("email", req.getParameter("email"));
+				req.setAttribute("phone", req.getParameter("phone"));
+				req.setAttribute("area", req.getParameter("area"));
+				req.setAttribute("address", req.getParameter("address"));
+				req.setAttribute("gender", req.getParameter("gender"));
+				req.setAttribute("dob", req.getParameter("dob"));
+				System.out.println("3");
+
+				showPageSignup(req, resp);
+
+			} catch (Exception e) {
+				System.out.println("4");
+				e.printStackTrace();
+			}
+			
+		
+			/*cusService.checkValidInfoCustomer(req.getParameter("firstname"), req.getParameter("lastname"),
+					req.getParameter("address"), req.getParameter("gender"), req.getParameter("phone"),
+					req.getParameter("dob"), req.getParameter("area"), req.getParameter("email"),
+					req.getParameter("usernamesignup"), req.getParameter("passsignup"), req.getParameter("passcheck"));
+			req.removeAttribute("exception");
+			System.out.println("111");
+			UserModel user = new UserModel();
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			user.setUserID(cusService.createCustomerID());
+			user.setFirstName(req.getParameter("firstname"));
+			user.setLastName(req.getParameter("lastname"));
+			user.setEmail(req.getParameter("email"));
+			user.setPhone(req.getParameter("phone"));
+			user.setArea(req.getParameter("area"));
+			user.setAddress(req.getParameter("address"));
+			user.setGender(Integer.parseInt(req.getParameter("gender")));
+			user.setDob(formatter.parse(req.getParameter("dob")));
+
+			AccountModel acc = new AccountModel();
+			acc.setUserID(user.getUserID());
+			acc.setUserName(req.getParameter("usernamesignup"));
+			acc.setPassword(req.getParameter("passsignup"));
+
+			HttpSession session = req.getSession();
+			session.setAttribute("newuser", user);
+			
+			session.setAttribute("newacc", acc);
+			
+			cusService.insertCustomer(user);
+			accService.insertAccount(acc);
+			System.out.println("2");
+			//session.invalidate();
+			resp.sendRedirect(req.getContextPath() + "/login"); 
+			*/
+
+		}
+		
 	}
 
 	private void showPageSignup(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -129,7 +231,7 @@ public class SignupController extends HttpServlet {
 		HttpSession session = req.getSession();
 		String verification = (String) session.getAttribute("verification");
 		String usercode = req.getParameter("usercode");
-		if (verification.equals(usercode)) {
+		if (!verification.equals(usercode)) {
 			UserModel user = (UserModel) session.getAttribute("newuser");
 			AccountModel acc = (AccountModel) session.getAttribute("newacc");
 			cusService.insertCustomer(user);
@@ -140,6 +242,14 @@ public class SignupController extends HttpServlet {
 			req.setAttribute("mess", "Mã xác thực chưa đúng");
 			showVerificationPage(req, resp);
 		}
+		
+		UserModel user = (UserModel) session.getAttribute("newuser");
+		AccountModel acc = (AccountModel) session.getAttribute("newacc");
+		cusService.insertCustomer(user);
+		accService.insertAccount(acc);
+		session.invalidate();
+		resp.sendRedirect("login");
+		
 	}
 
 	private void sendVerificationEmail(HttpServletRequest req) {

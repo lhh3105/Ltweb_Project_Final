@@ -67,7 +67,7 @@
 				</div>
 				<div class="input-field">
 					<select name="gender"
-						style="padding: 0 0 0 20px; margin-left: 20px; width: 180px; height: 43px; background: transparent; border: none; outline: none; border: 2px solid rgba(255, 255, 255, .2); border-radius: 40px; font-size: 16px; color: white">
+						style="padding: 0 0 0 20px; margin-left: 20px; width: 180px; height: 43px; background: white; border: none; outline: none; border: 2px solid rgb(128, 128, 128); border-radius: 40px; font-size: 16px; color: black">
 						<option style="background: transparent" value="0">Nam</option>
 						<option style="background: transparent" value="1">Nữ</option>
 					</select>

@@ -9,8 +9,11 @@ import javax.mail.internet.InternetAddress;
 
 import com.azshop.dao.IAccountDAO;
 import com.azshop.dao.ICustomerDAO;
+import com.azshop.dao.IProductDAO;
 import com.azshop.dao.impl.AccountDAOImpl;
 import com.azshop.dao.impl.CustomerDAOImpl;
+import com.azshop.dao.impl.ProductDAOImpl;
+import com.azshop.models.ProductModel;
 import com.azshop.models.UserModel;
 import com.azshop.service.ICustomerService;
 
@@ -52,6 +55,12 @@ public class CustomerServiceImpl implements ICustomerService {
 		int id = listCustomer.get(listCustomer.size() - 1).getUserID();
 		return id + 1;
 	}
+	public static void main(String[] args) {
+		ICustomerService cus = new CustomerServiceImpl();
+
+		int x = cus.createCustomerID();
+		System.out.println("xam "+ x);
+	} 
 
 	public void createAvatar(UserModel user) {
 		if (user.getAvatar() == null || user.getAvatar() == "") {
@@ -84,12 +93,12 @@ public class CustomerServiceImpl implements ICustomerService {
 		} catch (ParseException e) {
 			throw new IllegalArgumentException("Ngày sinh không hợp lệ");
 		}
-		try {
+		/*try {
 			InternetAddress emailAddr = new InternetAddress(email);
 			emailAddr.validate();
 		} catch (AddressException ex) {
 			throw new IllegalArgumentException("Email không hợp lệ");
-		}
+		}*/
 		if (accDAO.findByUsername(username).getUserID() != 0)
 			throw new IllegalArgumentException("Tên đăng nhập đã tồn tại");
 		if (accDAO.findByEmail(email).getUserID() != 0)

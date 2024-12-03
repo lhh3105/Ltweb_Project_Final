@@ -147,10 +147,9 @@ a{
 					</a>
 				</div>
 				<div class="seller-avt">
-					<img src="${user.avatar}" id="myImage" alt="User Image"> <input
-						class="hind" type="file" id="imageInput" accept="image/*">
-					<label class="seller-btn seller-button-img" for="imageInput">Sửa
-						ảnh</label>
+					<img src="${user.avatar}" id="myImage" alt="User Image"> 
+					<input class="hind" type="file" id="imageInput" accept="image/*">
+					<label class="seller-btn seller-button-img" for="imageInput">Sửa ảnh</label>
 				</div>
 			</div>
 		</div>
@@ -158,7 +157,7 @@ a{
 </section>
 <script>
 	// JavaScript để xử lý sự kiện khi giá trị của input file thay đổi
-	document.getElementById('imageInput').addEventListener('change',
+/*	document.getElementById('imageInput').addEventListener('change',
 			function(e) {
 				// Đối tượng hình ảnh
 
@@ -180,5 +179,21 @@ a{
 					}
 				});
 				//window.location.href = 'infoUser'
+			}); */
+	
+			document.getElementById('imageInput').addEventListener('change', function (event) {
+			    const file = event.target.files[0]; // Lấy file đầu tiên được chọn
+
+			    if (file) {
+			        const reader = new FileReader();
+
+			        // Khi FileReader hoàn tất việc đọc file
+			        reader.onload = function (e) {
+			            const img = document.getElementById('myImage');
+			            img.src = e.target.result; // Cập nhật src của thẻ <img> bằng kết quả đọc file
+			        };
+
+			        reader.readAsDataURL(file); // Đọc file dưới dạng URL
+			    }
 			});
 </script>

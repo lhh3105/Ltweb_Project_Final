@@ -79,6 +79,7 @@ public class LoginController extends HttpServlet {
 			showPageLogin(req, resp);
 		} else {
 			HttpSession session = req.getSession(true);
+			session.setAttribute("username", username);
 			session.setAttribute("user", user);
 			if ("on".equals(req.getParameter("remember"))) {
 				saveRemeberMe(resp, user.getUserID());
@@ -92,15 +93,23 @@ public class LoginController extends HttpServlet {
 		HttpSession session = req.getSession();
 		if (session != null && session.getAttribute("user") != null) {
 			UserModel user = (UserModel) session.getAttribute("user");
+			String name =  (String) session.getAttribute("username");
+			
+			System.out.print("ten "+ name);
+			
 			String url = null;
-			if (user.getType() == 0)
+			if (user.getType() == 0) {
 				url = "/home";
+				
+			}
 			else if (user.getType() == 1)
 				url = "/sellerInfor";
 			else if (user.getType() == 2)
 				url = "/shipper-list-shipping";
 			else if (user.getType() == 3)
 				url = "/adminAccount";
+			
+			req.setAttribute("username", name);
 			resp.sendRedirect(req.getContextPath() + url);
 		} else {
 			resp.sendRedirect(req.getContextPath() + "/login");

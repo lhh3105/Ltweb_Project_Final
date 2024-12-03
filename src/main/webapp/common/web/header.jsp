@@ -46,7 +46,7 @@
 
 				<!-- Icon header -->
 				<div class="wrap-icon-header flex-w flex-r-m">
-
+					<h4 style = "color: black; margin-top: 12px">${username}</h4>
 					<ul class="main-menu">
 						<li><a href="<c:url value='/infoUser'/>"
 							class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11">
