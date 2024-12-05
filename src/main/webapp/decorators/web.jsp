@@ -290,6 +290,7 @@
 			var selectedValue = button.value;
 			document.getElementById('hiddenInput').value = selectedValue;
 		}
+		
 	</script>
 </body>
 </html>

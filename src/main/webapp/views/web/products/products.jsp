@@ -11,7 +11,7 @@
 
 <body>
 	<!-- Product -->
-	<form action="<c:url value='/products' />" method="post">
+	
 	<section class="bg0 p-t-23 p-b-130">
 		<div class="container">
 			<div class="p-b-10">
@@ -31,8 +31,11 @@
 				</div>
 				
 				<div class="flex-w flex-c-m m-tb-10">
+				<form action="<c:url value='/products' />" method="post" class="flex-w flex-c-m m-tb-10">
 					 <div class="dropdown flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4"
 					 	>
+					 	
+					 	
         				<label for="category" style = "margin-right: 10px; margin-left: 10px">Loại sản phẩm:</label>
         				
         				<select id="category" name = "category" onchange="updateSubcategories() " style = "margin-bottom: 7px; margin-right: 10px">
@@ -52,6 +55,7 @@
    					 
    					  <!-- Nút lọc -->
     					<button type="submit" class="btn btn-primary">Lọc</button>
+    				</form>
 				
 					<div
 						class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
@@ -61,6 +65,8 @@
 							class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
 						Lọc
 					</div>
+					
+					
 					<div
 						class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
 						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
@@ -287,7 +293,7 @@
 			</div>
 		</div>
 	</section>
-	</form>
+	
 
 	<script>
 		var params = {

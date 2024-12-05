@@ -131,6 +131,7 @@ public class CartController extends HttpServlet {
 		int customerID = user.getUserID();
 		int itemID = Integer.parseInt(req.getParameter("selectedItemID"));
 		int quantity = Integer.parseInt(req.getParameter("selectedQuantity"));
+		System.out.println(itemID +" HELLO " + quantity);
 
 		cart.setCustomerID(customerID);
 		cart.setItemID(itemID);

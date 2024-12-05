@@ -133,14 +133,16 @@
 					</div>
 					<div class="mt-5 row">
 						<dd class="col-5">
-							<form id="addToCartForm" action="#" method="post">
+							<form id="addToCartForm" action="addToCart" method="post">
 								<div>
 									<input type="hidden" name="selectedItemID" id="selectedItemID"
-										value=""> <input type="hidden" name="selectedQuantity"
+										value=""> 
+									<input type="hidden" name="selectedQuantity"
 										id="selectedQuantity" value="1">
 								</div>
 								<div class="text-center">
 									<input onclick="addToCart()"
+										type = "submit"
 										style="width: 100%; padding: 1rem; cursor: pointer; float: right"
 										class="btn btn-primary shadow-0 flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail"
 										value="Thêm vào giỏ hàng" readonly
