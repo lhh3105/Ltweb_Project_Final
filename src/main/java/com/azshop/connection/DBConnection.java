@@ -6,9 +6,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DBConnection {
-	public static final String DB_URL = "jdbc:mysql://localhost:3306/AZShop1";
+	public static final String DB_URL = "jdbc:mysql://localhost:3306/AZShop";
 	private static String USER_NAME = "root";
-	private static String PASSWORD = "huy31052003";
+	private static String PASSWORD = "12345678";
 
 	private static Connection con;
 	
