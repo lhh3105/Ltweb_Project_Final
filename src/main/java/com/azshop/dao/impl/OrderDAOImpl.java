@@ -494,6 +494,11 @@ customer.setLastName(rs.getString("LastNameCustomer"));
 		List<String> citys = Assignment.getAssign().get(area);
 		return findDeliveryByCondition(condition, 1).stream().filter(order -> order.getCity().equals("none") || citys.contains(order.getCity())).toList();
 	}
+	
+	 public static void main(String[] args) {
+		 List<String> citys = Assignment.getAssign().get("Miền Bắc");
+		 System.out.println(citys);
+	 }
 
 	@Override
 	public List<OrderModel> findShipingByShipperID(int ShipperID) {
