@@ -2,150 +2,203 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <style>
-.avatar-lg {
-	height: 5rem;
-	width: 5rem;
+/* Toàn bộ nền và chữ */
+body {
+    background-color: #121212; /* Nền chính tối */
+    color: #e0e0e0; /* Màu chữ sáng */
+    font-family: 'Arial', sans-serif; /* Font chữ phổ biến */
+    line-height: 1.5; /* Dễ đọc */
+    margin: 0;
+    padding: 0;
 }
 
-.font-size-18 {
-	font-size: 18px !important;
+/* Thẻ chính */
+main {
+    padding: 20px;
 }
 
-.font-size-20 {
-	font-size: 20px !important;
+/* Tiêu đề */
+h1, h2, h3, h4, h5, h6 {
+    color: #ffffff; /* Tiêu đề màu trắng */
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
-.text-truncate {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
+h1 {
+    font-size: 2rem;
+    text-align: left;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
 }
 
+h5, h6 {
+    font-size: 1.2rem;
+}
+
+/* Liên kết */
 a {
-	text-decoration: none !important;
+    color: #64b5f6; /* Màu xanh dương sáng */
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
 }
 
-.w-xl {
-	min-width: 160px;
+a:hover {
+    color: #42a5f5; /* Xanh dương khi hover */
 }
 
+/* Thẻ card */
 .card {
-	margin-bottom: 24px;
-	-webkit-box-shadow: 0 2px 3px #e4e8f0;
-	box-shadow: 0 2px 3px #e4e8f0;
+    background-color: #1e1e1e; /* Màu nền card */
+    border: 1px solid #2c2c2c; /* Viền nhẹ tối */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng */
+    margin-bottom: 24px;
+    padding: 20px;
+    color: #d6d6d6; /* Màu chữ trong card */
+    transition: transform 0.3s ease-in-out;
 }
 
-.card {
-	position: relative;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: column;
-	flex-direction: column;
-	min-width: 0;
-	word-wrap: break-word;
-	background-color: #fff;
-	background-clip: border-box;
-	border: 1px solid #eff0f2;
-	border-radius: 1rem;
+.card:hover {
+    transform: scale(1.02); /* Phóng to nhẹ khi hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-.product-item {
-	display: flex;
-	flex-wrap: nowrap;
-	align-items: flex;
-	margin-top: 20px;
+/* Tiêu đề trong card */
+.card-body h6 {
+    font-size: 1rem;
+    color: #ffffff; /* Màu chữ tiêu đề trong card */
 }
 
-.product-image {
-	margin-left: 30px;
-	margin-top: 10px;
-	margin-bottom: 0px;
+.card-body p {
+    font-size: 0.9rem;
+    margin-bottom: 0;
 }
 
-.product-info {
-	flex-grow: 2;
+/* Phần trạng thái */
+.text-success {
+    color: #4caf50 !important; /* Màu xanh thành công */
 }
 
-.price-info {
-	flex-grow: 10;
-	justify-content: flex-start;
-	text-align: center;
-	align-items: center;
+.text-danger {
+    color: #e57373 !important; /* Màu đỏ */
 }
 
-.order-details-container {
-	margin-bottom: 0;
+.text-warning {
+    color: #ffb74d !important; /* Màu cam */
 }
 
+.text-secondary {
+    color: #9e9e9e !important; /* Màu xám phụ */
+}
+
+/* Button */
+button {
+    background-color: #424242; /* Màu nền nút tối */
+    color: #e0e0e0; /* Chữ màu sáng */
+    border: 1px solid #616161; /* Viền nút */
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #616161; /* Nền sáng hơn khi hover */
+    color: #ffffff; /* Chữ trắng */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Dòng trạng thái */
 .track-line {
-	height: 2px !important;
-	background-color: #488978;
-	opacity: 1;
-	flex: 1 1 auto !important;
+    background-color: #4caf50; /* Đường màu xanh */
+    height: 2px;
+    border-radius: 1px;
+    margin: 10px 0;
 }
 
 .off-track-line {
-	height: 2px !important;
-	background-color: #808080;
-	opacity: 1;
-	flex: 1 1 auto !important;
+    background-color: #757575; /* Đường xám nhạt */
+    height: 2px;
+    border-radius: 1px;
+    margin: 10px 0;
 }
 
-.dot {
-	height: 10px;
-	width: 10px;
-	margin-left: 3px;
-	margin-right: 3px;
-	margin-top: 0px;
-	background-color: #488978;
-	border-radius: 50%;
-	display: inline-block
+/* Chấm trạng thái */
+.dot, .big-dot {
+    background-color: #4caf50; /* Chấm xanh */
+    border-radius: 50%;
 }
 
-.off-dot {
-	height: 10px;
-	width: 10px;
-	margin-left: 3px;
-	margin-right: 3px;
-	margin-top: 0px;
-	background-color: #808080;
-	border-radius: 50%;
-	display: inline-block
+.off-dot, .off-big-dot {
+    background-color: #616161; /* Chấm xám */
+    border-radius: 50%;
 }
 
-.big-dot {
-	height: 25px;
-	width: 25px;
-	margin-left: 0px;
-	margin-right: 0px;
-	margin-top: 0px;
-	background-color: #488978;
-	border-radius: 50%;
-	display: inline-block;
+/* Các item sản phẩm */
+.product-item {
+    display: flex;
+    align-items: flex-start;
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #212121;
+    border-radius: 8px;
+    transition: background-color 0.3s ease-in-out;
 }
 
-.off-big-dot {
-	height: 25px;
-	width: 25px;
-	margin-left: 0px;
-	margin-right: 0px;
-	margin-top: 0px;
-	background-color: #808080;
-	border-radius: 50%;
-	display: inline-block;
+.product-item:hover {
+    background-color: #333333; /* Làm sáng nhẹ khi hover */
 }
 
-.big-dot i {
-	font-size: 12px;
+/* Thông tin sản phẩm */
+.product-info {
+    flex-grow: 2;
+    margin-left: 20px;
+    color: #d6d6d6;
 }
 
-.card-stepper {
-	z-index: 0
+.product-image img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* Tổng giá tiền */
+.price-info {
+    text-align: right;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffb74d;
+}
+
+/* Chi tiết đơn hàng */
+.order-details-container {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+}
+
+.order-details-container .row {
+    margin-bottom: 10px;
+}
+
+.order-details-container .w-75 {
+    font-size: 1rem;
+    color: #ffffff; /* Chữ trắng */
+}
+
+.order-details-container .w-25 {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #e0e0e0;
+}
+
+/* Form ẩn */
+input[type="hidden"] {
+    background-color: #121212;
+    border: none;
 }
 </style>
+
 <main>
 	<div class="container-fluid px-4">
 		<h1 class="mt-4">Lịch sử xác nhận đơn hàng</h1>
