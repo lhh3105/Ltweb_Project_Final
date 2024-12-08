@@ -21,6 +21,10 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-floating mb-3">
+												<input class="form-control" type="text" name="productID" />
+												<label>Id</label>
+											</div>
+										<div class="form-floating mb-3">
 											<input class="form-control" type="text" name="productName" />
 											<label>Tên sản phẩm</label>
 										</div>
@@ -34,14 +38,14 @@
 									</div>
 									<div class="col-md-6"> 
 										<div class="form-floating mb-3"> 
-											<select name="category" class="form-control"> 
-												<option value="" style="text-align: center">-- 
+											<select id="category" name = "category"  class="form-control"> 
+											<option value="" style="text-align: center">-- 
 													Select --</option> 
-												<c:forEach var="category" items="${listCategory}"> 
-													<option value="${category.categoryID}" 
-														style="text-align: center">${category.categoryName}</option> 
-												</c:forEach> 
-											</select> <label>Loại</label> 
+            										<option value="3">Chair</option>
+            										<option value="6">Table</option>
+            										<option value="1">Shelf</option>
+            				
+        									</select> <label>Loại</label> 
 										</div> 
  
 										<div class="form-floating mb-3"> 

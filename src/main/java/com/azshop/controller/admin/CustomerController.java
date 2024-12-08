@@ -152,7 +152,7 @@ public class CustomerController extends HttpServlet {
 	private void insertCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			int customerID = customerService.createCustomerID();
+			int customerID = Integer.parseInt(req.getParameter("id"));
 			String firstName = req.getParameter("firstName");
 			String lastName = req.getParameter("lastName");
 			String address = req.getParameter("address");

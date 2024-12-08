@@ -14,8 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.azshop.models.AccountModel;
 import com.azshop.models.UserModel;
+import com.azshop.service.IAccountService;
+import com.azshop.service.ICustomerService;
 import com.azshop.service.IShipperService;
+import com.azshop.service.impl.AccountServiceImpl;
+import com.azshop.service.impl.CustomerServiceImpl;
 import com.azshop.service.impl.ShipperServiceImpl;
 import com.azshop.utils.MessageUtil;
 
@@ -25,7 +30,7 @@ public class ShipperController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	IShipperService shipperService = new ShipperServiceImpl();
-
+	IAccountService accountService = new AccountServiceImpl();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String url = req.getRequestURI().toString();
@@ -113,7 +118,7 @@ public class ShipperController extends HttpServlet {
 			resp.setCharacterEncoding("utf-8");
 
 			// nhan du lieu tu form
-			int id = shipperService.createShipperID();
+			int id = Integer.parseInt(req.getParameter("userID"));
 			String firstName = req.getParameter("firstName");
 			String lastName = req.getParameter("lastName");
 			String address = req.getParameter("address");
@@ -146,6 +151,8 @@ public class ShipperController extends HttpServlet {
 			newUser.setArea(area);
 			newUser.setEmail(email);
 			// goi pt insert trong service
+			AccountModel accountMd = new AccountModel(id, "User" + id, "12345");
+			accountService.insertAccount(accountMd);
 			shipperService.insertShipper(newUser);
 			MessageUtil.showMessage(req, "addSuccess");
 		} catch (Exception ex) {

@@ -2,229 +2,172 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/common/taglib.jsp"%>
 <style>
-.avatar-lg {
-	height: 5rem;
-	width: 5rem;
+/* Nền tổng thể */
+body {
+	background-color: #2c2f33;
+	color: #ffffff;
 }
 
-.font-size-18 {
-	font-size: 18px !important;
-}
-
-.font-size-20 {
-	font-size: 20px !important;
-}
-
-.text-truncate {
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-a {
-	text-decoration: none !important;
-}
-
-.w-xl {
-	min-width: 160px;
-}
-
+/* Card */
 .card {
 	margin-bottom: 24px;
-	-webkit-box-shadow: 0 2px 3px #e4e8f0;
-	box-shadow: 0 2px 3px #e4e8f0;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+	background-color: #23272a;
+	border: none;
+	border-radius: 8px;
 }
 
-.card {
-	position: relative;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-orient: vertical;
-	-webkit-box-direction: normal;
-	-ms-flex-direction: column;
-	flex-direction: column;
-	min-width: 0;
-	word-wrap: break-word;
-	background-color: #fff;
-	background-clip: border-box;
-	border: 1px solid #eff0f2;
-	border-radius: 1rem;
+.card-header {
+	background-color: #2c2f33;
+	color: #ffffff;
+	border-bottom: 2px solid #40444b;
+	font-weight: bold;
 }
 
-.product-item {
-	display: flex;
-	flex-wrap: nowrap;
-	align-items: flex;
-	margin-top: 20px;
-}
-
-.product-image {
-	margin-left: 30px;
+.table {
+	width: 100%;
+	border-collapse: collapse;
 	margin-top: 10px;
-	margin-bottom: 0px;
+	color: #ffffff;
 }
 
-.product-info {
-	flex-grow: 2;
+.table thead th {
+	background-color: #40444b;
+	color: #ffffff;
+	text-align: left;
+	padding: 12px;
 }
 
-.price-info {
-	flex-grow: 10;
-	justify-content: flex-start;
-	text-align: center;
-	align-items: center;
+.table tbody tr {
+	transition: background-color 0.3s;
 }
 
-.order-details-container {
-	margin-bottom: 0;
+.table tbody tr:hover {
+	background-color: #36393f;
 }
 
-.track-line {
-	height: 2px !important;
-	background-color: #488978;
-	opacity: 1;
-	flex: 1 1 auto !important;
+.table tbody td {
+	padding: 10px;
+	border-top: 1px solid #40444b;
 }
 
-.off-track-line {
-	height: 2px !important;
-	background-color: #808080;
-	opacity: 1;
-	flex: 1 1 auto !important;
-}
-
-.dot {
-	height: 10px;
-	width: 10px;
-	margin-left: 3px;
-	margin-right: 3px;
-	margin-top: 0px;
-	background-color: #488978;
-	border-radius: 50%;
-	display: inline-block
-}
-
-.off-dot {
-	height: 10px;
-	width: 10px;
-	margin-left: 3px;
-	margin-right: 3px;
-	margin-top: 0px;
-	background-color: #808080;
-	border-radius: 50%;
-	display: inline-block
-}
-
-.big-dot {
-	height: 25px;
-	width: 25px;
-	margin-left: 0px;
-	margin-right: 0px;
-	margin-top: 0px;
-	background-color: #488978;
-	border-radius: 50%;
-	display: inline-block;
-}
-
-.off-big-dot {
-	height: 25px;
-	width: 25px;
-	margin-left: 0px;
-	margin-right: 0px;
-	margin-top: 0px;
-	background-color: #808080;
-	border-radius: 50%;
-	display: inline-block;
-}
-
-.big-dot i {
+/* Badge */
+.badge {
+	padding: 5px 10px;
+	border-radius: 5px;
 	font-size: 12px;
 }
 
-.card-stepper {
-	z-index: 0
+.badge-success {
+	background-color: #4caf50;
+	color: #ffffff;
+}
+
+.badge-danger {
+	background-color: #e74c3c;
+	color: #ffffff;
+}
+
+.badge-warning {
+	background-color: #f1c40f;
+	color: #212529;
+}
+
+/* Nút hành động */
+.btn-sm {
+	padding: 5px 10px;
+	font-size: 12px;
+	border-radius: 5px;
+	background-color: #007bff;
+	color: #ffffff;
+	border: none;
+	transition: background-color 0.3s;
+}
+
+.btn-sm:hover {
+	background-color: #0056b3;
+}
+
+.fa-eye {
+	font-size: 14px;
+	color: #ffffff;
+}
+
+.fa-eye:hover {
+	color: #f1c40f;
 }
 </style>
 <main>
 	<div class="container-fluid px-4">		
-	<h2 class="mt-4">Lịch sử xác nhận đơn</h2>
-			<div class="card mb-4">
-				<div class="card-header">
-					<i class="fas fa-table me-1"></i> Đơn hàng
-				</div>
-				<div class="card-body">
-					<table id="datatablesSimple">
-						<thead>
-							<tr>
-								<th>Mã đơn</th>
-								<th>Tên khách hàng</th>
-								<th>Địa chỉ</th>
-								<th>Ngày đặt</th>
-								<th>Trạng thái</th>
-								<th>Tổng tiền</th>
-								<th>Thanh toán</th>
-								<th>Action</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="i" items="${listOrder}">
-								<tr>
-									<td>${i.orderID}</td>
-									<td>${i.customer.lastName} ${i.customer.firstName}</td>
-									<td>${i.address}</td>
-									<td>${i.orderDate}</td>
-									<td>
-										<div class="d-flex justify-content-start">
-											<c:choose>
-												<c:when test="${i.status==1}">
-													<i style="color: green">Đã xác nhận</i>
-												</c:when>
-												<c:when test="${i.status==2}">
-													<i style="color: green">Đang gói hàng</i>
-												</c:when>
-												<c:when test="${i.status==3}">
-													<i style="color: green">Đang giao</i>
-												</c:when>
-												<c:when test="${i.status==4}">
-													<i style="color: green">Đã giao</i>
-												</c:when>
-												<c:when test="${i.status==5}">
-													<i style="color: red">Đã hủy</i>
-												</c:when>
-												<c:otherwise>
-													<i style="color: orange">Chưa xác nhận</i>
-												</c:otherwise>
-											</c:choose>
-										</div>
-									</td>
-									<td>${i.totalMoney}</td>
-									<td>
-										<div class="d-flex justify-content-start">
-											<c:choose>
-												<c:when test="${i.payment.status==1}">
-													<i style="color: green"> ✔</i>
-												</c:when>
-												<c:when test="${i.payment.status==0}">
-													<i style="color: red">✖</i>
-												</c:when>
-											</c:choose>
-										</div>
-									</td>
-									<td>
-										<div class="hidden-sm hidden-xs btn-group">
-											<a
-												href="<c:url value='/sellerOrderDetail?orderID=${i.orderID}'/>">
-												<button class="btn btn-xs btn-info btn-sm">
-													<i class="fa-regular fa-eye"></i>
-												</button>
-											</a>
-										</div>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-				</div>
+		<h2 class="mt-4">Lịch sử đơn hàng</h2>
+		<div class="card mb-4">
+			<div class="card-header">
+				<i class="fas fa-box"></i> Đơn hàng
 			</div>
+			<div class="card-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>Mã đơn</th>
+							<th>Tên khách hàng</th>
+							<th>Địa chỉ</th>
+							<th>Ngày đặt</th>
+							<th>Trạng thái</th>
+							<th>Tổng tiền</th>
+							<th>Thanh toán</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="i" items="${listOrder}">
+							<tr>
+								<td>${i.orderID}</td>
+								<td>${i.customer.lastName} ${i.customer.firstName}</td>
+								<td>${i.address}</td>
+								<td>${i.orderDate}</td>
+								<td>
+									<c:choose>
+										<c:when test="${i.status==1}">
+											<span class="badge badge-success">Đã xác nhận</span>
+										</c:when>
+										<c:when test="${i.status==2}">
+											<span class="badge badge-success">Đang gói hàng</span>
+										</c:when>
+										<c:when test="${i.status==3}">
+											<span class="badge badge-success">Đang giao</span>
+										</c:when>
+										<c:when test="${i.status==4}">
+											<span class="badge badge-success">Đã giao</span>
+										</c:when>
+										<c:when test="${i.status==5}">
+											<span class="badge badge-danger">Đã hủy</span>
+										</c:when>
+										<c:otherwise>
+											<span class="badge badge-warning">Chưa xác nhận</span>
+										</c:otherwise>
+									</c:choose>
+								</td>
+								<td>${i.totalMoney}</td>
+								<td>
+									<c:choose>
+										<c:when test="${i.payment.status==1}">
+											<i class="fa fa-check-circle text-success"></i>
+										</c:when>
+										<c:when test="${i.payment.status==0}">
+											<i class="fa fa-times-circle text-danger"></i>
+										</c:when>
+									</c:choose>
+								</td>
+								<td>
+									<a href="<c:url value='/sellerOrderDetail?orderID=${i.orderID}'/>" class="btn btn-sm">
+										<i class="fa fa-eye"></i> Xem
+									</a>
+								</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 </main>

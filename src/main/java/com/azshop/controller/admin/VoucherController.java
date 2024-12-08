@@ -129,7 +129,8 @@ public class VoucherController extends HttpServlet {
 			req.setCharacterEncoding("utf-8");
 			resp.setCharacterEncoding("utf-8");
 			// nhan du lieu tu form
-
+			
+			int id = Integer.parseInt(req.getParameter("voucherID"));
 			String description = req.getParameter("description");
 			int discount = Integer.parseInt(req.getParameter("discount"));
 			int minimumPrice = Integer.parseInt(req.getParameter("minimumPrice"));
@@ -149,6 +150,7 @@ public class VoucherController extends HttpServlet {
 			// dua du lieu vao model
 			VoucherModel newVoucher = new VoucherModel();
 
+			newVoucher.setVoucherID(id);
 			newVoucher.setDescription(description);
 			newVoucher.setDiscount(discount);
 			newVoucher.setMinimumPrice(minimumPrice);

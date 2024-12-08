@@ -27,7 +27,7 @@
 									<div class="col-md-6">
 										<div class="form-floating mb-3">
 											<input class="form-control" type="text" name="voucherID"
-												readonly="readonly" /> <label>Mã</label>
+												/> <label>Mã</label>
 										</div>
 										<div class="form-floating mb-3">
 											<input class="form-control" type="text" name="description" />

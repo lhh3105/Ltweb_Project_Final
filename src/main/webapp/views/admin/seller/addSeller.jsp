@@ -26,8 +26,8 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-floating mb-3">
-											<input class="form-control" type="text" name="userID"
-												readonly="readonly" /> <label>Mã</label>
+											<input class="form-control" type="text" name="userID" />
+											<label>Mã</label>
 										</div>
 										<div class="form-floating mb-3">
 											<input class="form-control" type="text" name="firstName" />
