@@ -118,7 +118,7 @@ public class ShipperController extends HttpServlet {
 			resp.setCharacterEncoding("utf-8");
 
 			// nhan du lieu tu form
-			int id = Integer.parseInt(req.getParameter("userID"));
+			int id = Integer.parseInt(req.getParameter("ID"));
 			String firstName = req.getParameter("firstName");
 			String lastName = req.getParameter("lastName");
 			String address = req.getParameter("address");

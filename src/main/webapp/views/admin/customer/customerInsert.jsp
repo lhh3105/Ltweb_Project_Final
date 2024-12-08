@@ -27,6 +27,10 @@
 								<div class="row">
 									<div class="col-md-6">
 											<div class="form-floating mb-3">
+												<input class="form-control" type="text" name="id" />
+												<label>Mã</label>
+											</div>
+											<div class="form-floating mb-3">
 												<input class="form-control" type="text" name="firstName" />
 												<label>Tên</label>
 											</div>
@@ -43,10 +47,7 @@
 													<option value="1" ${customer.gender == 1 ? 'selected' : ''}>Nữ</option>
 												</select> <label> Giới tính </label>
 											</div>
-											<div class="form-floating mb-3">
-											<input class="form-control" type="text" name="email"
-												/> <label>Email</label>
-										</div>	
+											
 										</div>
 										<div class="col-md-6">
 											<div class="form-floating mb-3">
@@ -62,6 +63,10 @@
 												<input class="form-control" type="text" name="avatar"
 													value="https://storage.googleapis.com/web-budget/Image/Avatar/first.png" /> <label>Avatar</label>
 											</div>
+											<div class="form-floating mb-3">
+											<input class="form-control" type="text" name="email"
+												/> <label>Email</label>
+										</div>	
 										</div>
 									</div>
 								<div class="text-center mt-4">
