@@ -14,8 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.azshop.models.AccountModel;
 import com.azshop.models.UserModel;
+import com.azshop.service.IAccountService;
+import com.azshop.service.ICustomerService;
 import com.azshop.service.ISellerService;
+import com.azshop.service.impl.AccountServiceImpl;
+import com.azshop.service.impl.CustomerServiceImpl;
 import com.azshop.service.impl.SellerServiceImpl;
 import com.azshop.utils.MessageUtil;
 
@@ -24,6 +29,7 @@ import com.azshop.utils.MessageUtil;
 public class SellerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ISellerService sellerService = new SellerServiceImpl();
+	IAccountService accountService = new AccountServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -103,7 +109,7 @@ public class SellerController extends HttpServlet {
 			req.setCharacterEncoding("utf-8");
 			resp.setCharacterEncoding("utf-8");
 			// nhan du lieu tu form
-			int id = sellerService.createSellerID();
+			int id = Integer.parseInt(req.getParameter("userID"));
 			String firstName = req.getParameter("firstName");
 			String lastName = req.getParameter("lastName");
 			String address = req.getParameter("address");
@@ -137,6 +143,8 @@ public class SellerController extends HttpServlet {
 			newUser.setEmail(email);
 			// goi pt insert trong service
 			sellerService.insertSeller(newUser);
+			AccountModel accountMd = new AccountModel(id, "User" + id, "12345");
+			accountService.insertAccount(accountMd);
 			MessageUtil.showMessage(req, "addSuccess");
 		} catch (Exception ex) {
 			MessageUtil.showMessage(req, "addFail");

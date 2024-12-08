@@ -152,7 +152,7 @@ public class CustomerController extends HttpServlet {
 	private void insertCustomer(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		try {
-			int customerID = customerService.createCustomerID();
+			int customerID = Integer.parseInt(req.getParameter("id"));
 			String firstName = req.getParameter("firstName");
 			String lastName = req.getParameter("lastName");
 			String address = req.getParameter("address");
@@ -181,12 +181,12 @@ public class CustomerController extends HttpServlet {
 			newUser.setDob(dob);
 			newUser.setCid(cid);
 			newUser.setEmail(email);
-
-			boolean checkInsertCustomer = customerService.insertCustomer(newUser);
-			if (checkInsertCustomer) {
-				AccountModel accountMd = new AccountModel(customerID, "User" + customerID, "12345");
-				accountService.insertAccount(accountMd);
-			}
+			newUser.setType(0);
+			
+			AccountModel accountMd = new AccountModel(customerID, "User" + customerID, "12345");
+			accountService.insertAccount(accountMd);
+			customerService.insertCustomer(newUser);
+			
 			MessageUtil.showMessage(req, "addSuccess");
 		} catch (Exception ex) {
 			MessageUtil.showMessage(req, "addFail");
@@ -200,6 +200,7 @@ public class CustomerController extends HttpServlet {
 		List<Top3Customer> list3 = reportService.reportTop3Customer();
 		req.setAttribute("listCustomer", listCustomer);
 		req.setAttribute("list3", list3);
+		
 
 		RequestDispatcher rd = req.getRequestDispatcher("/views/admin/customer/customer.jsp");
 		rd.forward(req, resp);

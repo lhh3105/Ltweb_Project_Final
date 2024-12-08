@@ -160,19 +160,16 @@ public class SellerDAOImpl implements ISellerDAO {
 	@Override
 	public List<UserModel> findBestSeller() {
 		Connection conn = null;
-		String sql = "Select AZShop.USER.*, count(AZShop.DETAIL.ItemID) as SL\r\n"
-				+ "from AZShop.USER \r\n"
-				+ "join AZShop.ORDER on AZShop.USER.UserID = AZShop.ORDER.SellerID\r\n"
-				+ "join AZShop.DETAIL on AZShop.ORDER.OrderID = AZShop.DETAIL.OrderID\r\n"
-				+ "where AZShop.USER.Type=1 AND AZShop.ORDER.Status=4\r\n"
-				+ "GROUP BY AZShop.USER.UserID\r\n"
-				+ "ORDER BY SL DESC LIMIT 10;";
+		String sql = "SELECT UserID, FirstName, LastName, Address, Gender, Phone, DoB, CID, KPI, Email "
+		           + "FROM AZShop.USER "
+		           + "WHERE Type = 1 "
+		           + "ORDER BY KPI DESC;";
 		List<UserModel> listSeller = new ArrayList<UserModel>();
 		try {
 			new DBConnection();
 			conn = DBConnection.getConnection();
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery(sql);
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				UserModel seller = new UserModel();
 
@@ -184,13 +181,11 @@ public class SellerDAOImpl implements ISellerDAO {
 				seller.setPhone(rs.getString("Phone"));
 				seller.setDob(rs.getDate("DoB"));
 				seller.setCid(rs.getString("CID"));
-				seller.setAvatar(rs.getString("Avatar"));
 				seller.setKpi(rs.getInt("KPI"));
 				seller.setEmail(rs.getString("Email"));
 
 				listSeller.add(seller);
 			}
-			conn.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();

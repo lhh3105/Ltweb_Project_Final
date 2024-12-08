@@ -141,7 +141,7 @@ public class ProductDAOImpl implements IProductDAO {
 
 	@Override
 	public void insertProduct(ProductModel model) {
-		String sql = "Insert into PRODUCT values (?,?,?,?,?,?,?)";
+		String sql = "INSERT INTO PRODUCT (ProductID, ProductName, Description, Origin, SupplierID, CategoryID, Material) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		try {
 			new DBConnection();
 			conn = DBConnection.getConnection();

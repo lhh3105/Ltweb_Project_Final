@@ -19,7 +19,7 @@ public class CustomerDAOImpl implements ICustomerDAO {
 
 	@Override
 	public List<UserModel> getAllCustomer() {
-		String sql = "SELECT * FROM USER WHERE Type=0";
+		String sql = "Select UserID, FirstName, LastName, Address, Gender, Phone, DoB, CID, Avatar, KPI, Email from AZShop.USER where Type=0";
 		List<UserModel> listCustomer = new ArrayList<>();
 		try {
 			new DBConnection();
@@ -28,22 +28,21 @@ public class CustomerDAOImpl implements ICustomerDAO {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				UserModel customer = new UserModel();
-				customer.setUserID(rs.getInt(1));
-				customer.setFirstName(rs.getString(2));
-				customer.setLastName(rs.getString(3));
-				customer.setAddress(rs.getString(4));
-				customer.setGender(rs.getInt(5));
-				customer.setPhone(rs.getString(6));
-				customer.setDob(rs.getDate(7));
-				customer.setCid(rs.getString(8));
-				customer.setAvatar(rs.getString(9));
-				customer.setType(rs.getInt(10));
-				customer.setKpi(rs.getInt(11));
-				customer.setArea(rs.getString(12));
-				customer.setEmail(rs.getString(13));
-				listCustomer.add(customer);
+				customer.setUserID(rs.getInt("UserID"));          
+	            customer.setFirstName(rs.getString("FirstName"));
+	            customer.setLastName(rs.getString("LastName"));
+	            customer.setAddress(rs.getString("Address"));
+	            customer.setGender(rs.getInt("Gender"));
+	            customer.setPhone(rs.getString("Phone"));
+	            customer.setDob(rs.getDate("DoB"));
+	            customer.setCid(rs.getString("CID"));
+	            customer.setAvatar(rs.getString("Avatar"));
+	            customer.setKpi(rs.getInt("KPI"));
+	            customer.setEmail(rs.getString("Email"));
+	            listCustomer.add(customer);
 			}
 			conn.close();
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}

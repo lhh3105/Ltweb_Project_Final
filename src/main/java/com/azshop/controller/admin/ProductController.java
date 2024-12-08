@@ -151,6 +151,7 @@ public class ProductController extends HttpServlet {
 
 	private void postinsert(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
 		try {
+			int id = Integer.parseInt(req.getParameter("productID"));
 			String productName = req.getParameter("productName");
 			String description = req.getParameter("description");
 			String origin = req.getParameter("origin");
@@ -158,7 +159,6 @@ public class ProductController extends HttpServlet {
 			int categoryID = Integer.parseInt(req.getParameter("category"));
 			String material = req.getParameter("material");
 
-			int id = prod.CreateProductID(categoryID);
 			ProductModel Pro = new ProductModel();
 			Pro.setProductID(id);
 			Pro.setProductName(productName);

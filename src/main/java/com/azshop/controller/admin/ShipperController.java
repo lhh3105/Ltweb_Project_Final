@@ -14,8 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.azshop.models.AccountModel;
 import com.azshop.models.UserModel;
+import com.azshop.service.IAccountService;
+import com.azshop.service.ICustomerService;
 import com.azshop.service.IShipperService;
+import com.azshop.service.impl.AccountServiceImpl;
+import com.azshop.service.impl.CustomerServiceImpl;
 import com.azshop.service.impl.ShipperServiceImpl;
 import com.azshop.utils.MessageUtil;
 
@@ -25,6 +30,7 @@ public class ShipperController extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 	IShipperService shipperService = new ShipperServiceImpl();
+	IAccountService accountService = new AccountServiceImpl();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -147,6 +153,8 @@ public class ShipperController extends HttpServlet {
 			newUser.setEmail(email);
 			// goi pt insert trong service
 			shipperService.insertShipper(newUser);
+			AccountModel accountMd = new AccountModel(id, "User" + id, "12345");
+			accountService.insertAccount(accountMd);
 			MessageUtil.showMessage(req, "addSuccess");
 		} catch (Exception ex) {
 			MessageUtil.showMessage(req, "addFail");

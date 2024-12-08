@@ -47,18 +47,19 @@ public class VoucherDAOImpl implements IVoucherDAO {
 
 	@Override
 	public void insertVoucher(VoucherModel model) {
-		String sql = "Insert into AZShop.VOUCHER(Description, Discount, MinimumPrice, Quantity, Mfg, Exp) Values (?,?,?,?,?,?)";
+		String sql = "Insert into AZShop.VOUCHER(VoucherId,Description, Discount, MinimumPrice, Quantity, Mfg, Exp) Values (?,?,?,?,?,?,?)";
 		try {
 			conn = DBConnection.getConnection();// ket noi csdl
 			PreparedStatement ps = conn.prepareStatement(sql);// nem cau lenh sql bang phat bieu prepare
 			// gan gia tri tham so
-			ps.setString(1, model.getDescription());
-			ps.setInt(2, model.getDiscount());
-			ps.setInt(3, model.getMinimumPrice());
-			ps.setInt(4, model.getQuantity());
+			ps.setInt(1, model.getVoucherID());
+			ps.setString(2, model.getDescription());
+			ps.setInt(3, model.getDiscount());
+			ps.setInt(4, model.getMinimumPrice());
+			ps.setInt(5, model.getQuantity());
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			ps.setString(5, sdf.format(model.getMfg()));
-			ps.setString(6, sdf.format(model.getExp()));
+			ps.setString(6, sdf.format(model.getMfg()));
+			ps.setString(7, sdf.format(model.getExp()));
 
 			ps.executeUpdate();// thuc thi cau query va tra ve Resultset
 			conn.close();
